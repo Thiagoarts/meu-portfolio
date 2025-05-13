@@ -4,7 +4,7 @@ styleSwitcherToggle.addEventListener("click", () => {
     document.querySelector(".style-switcher").classList.toggle("open");
 })
 // Hide Style - switcher on scroll
-window;addEventListener("scroll", () => {
+window.addEventListener("scroll", () => {
     if(document.querySelector(".style-switcher").classList.contains("open")){
         document.querySelector(".style-switcher").classList.remove("open");
     }
@@ -32,7 +32,7 @@ dayNight.addEventListener("click", () => {
     document.body.classList.toggle("dark");
 })
 window.addEventListener("load", () => {
-    if(document.body.classList,contains("dark"))
+    if(document.body.classList.contains("dark"))
     {
         dayNight.querySelector("i").classList.add("fa-sun");
     }

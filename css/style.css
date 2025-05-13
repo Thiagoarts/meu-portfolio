@@ -600,6 +600,13 @@ h3.my-profession
     line-height: 25px;
 }
 /* Portfolio */
+.portfolio-title {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-black-700); /* ou a cor que preferir */
+}
 .portfolio .container
 {
     padding-bottom: 40px;

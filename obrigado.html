@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Obrigado!</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    :root {
+      --bg-black-100: #fff;
+      --bg-black-50: #ccc;
+      --text-black-900: #000;
+      --text-black-700: #333;
+    }
+    body {
+      background-color: #f5f5f5;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    body.dark {
+      background-color: #222;
+      color: #eee;
+    }
+    .card {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: background-color 0.3s ease;
+    }
+    body.dark .card {
+      background-color: #333;
+    }
+    h1 { color: var(--accent); }
+    
+    p {
+      font-size: 18px;
+      color: #555;
+    }
+    body.dark p {
+      color: #ccc;
+    }
+    a {
+      background-color: var(--accent);
+      color: #000 !important; /* Texto sempre preto */
+      margin-top: 20px;
+      display: inline-block;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+    a:hover {
+    filter: brightness(0.9);
+    }
+
+    /* Style Switcher */
+    .style-switcher {
+      position: fixed;
+      right: 0;
+      top: 60px;
+      padding: 15px;
+      width: 200px;
+      border: 1px solid var(--bg-black-50);
+      background: var(--bg-black-100);
+      z-index: 101;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      transform: translateX(100%);
+    }
+    .style-switcher.open {
+      transform: translateX(-25px);
+    }
+    .style-switcher .s-icon {
+      position: absolute;
+      height: 40px;
+      width: 40px;
+      text-align: center;
+      font-size: 20px;
+      background: var(--bg-black-100);
+      color: var(--text-black-900);
+      right: 100%;
+      border: 1px solid var(--bg-black-50);
+      margin-right: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-radius: 50%;
+    }
+    .style-switcher .s-icon i {
+      line-height: 40px;
+    }
+    .style-switcher .style-switcher-toggler {
+      top: 0;
+    }
+    .style-switcher .day-night {
+      top: 55px;
+    }
+    .style-switcher h4 {
+      margin: 0 0 10px;
+      color: var(--text-black-700);
+      font-size: 16px;
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+    .style-switcher .colors {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .style-switcher .colors span {
+      display: inline-block;
+      height: 30px;
+      width: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .color-1 { background: #ec1839; }
+    .color-2 { background: #fa5b0f; }
+    .color-3 { background: #37b182; }
+    .color-4 { background: #1854b4; }
+    .color-5 { background: #f021b2; }
+
+    /* Color themes (simplificado para demonstração) */
+    body.theme-color-1 { --accent: #ec1839; }
+    body.theme-color-2 { --accent: #fa5b0f; }
+    body.theme-color-3 { --accent: #37b182; }
+    body.theme-color-4 { --accent: #1854b4; }
+    body.theme-color-5 { --accent: #f021b2; }
+
+    h1, a { color: var(--accent); }
+    a { background-color: var(--accent); }
+    a:hover { filter: brightness(0.9); }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <h1>Obrigado pelo contato!</h1>
+    <p>Recebemos sua mensagem e entraremos em contato em breve.</p>
+    <a href="index.html">Voltar para o site</a>
+  </div>
+
+  <!-- ==== Style Switcher ==== -->
+  <div class="style-switcher">
+    <div class="style-switcher-toggler s-icon">
+      <i class="fas fa-cog fa-spin"></i>
+    </div>
+    <div class="day-night s-icon">
+      <i class="fas fa-moon"></i>
+    </div>
+    <h4>Theme Colors</h4>
+    <div class="colors">
+      <span class="color-1" onclick="setActiveStyle('color-1')"></span>
+      <span class="color-2" onclick="setActiveStyle('color-2')"></span>
+      <span class="color-3" onclick="setActiveStyle('color-3')"></span>
+      <span class="color-4" onclick="setActiveStyle('color-4')"></span>
+      <span class="color-5" onclick="setActiveStyle('color-5')"></span>
+    </div>
+  </div>
+
+  <!-- ==== Script Style Switcher ==== -->
+  <script>
+    const styleSwitcherToggle = document.querySelector(".style-switcher-toggler");
+    const dayNight = document.querySelector(".day-night");
+
+    styleSwitcherToggle.addEventListener("click", () => {
+      document.querySelector(".style-switcher").classList.toggle("open");
+    });
+
+    window.addEventListener("scroll", () => {
+      if (document.querySelector(".style-switcher").classList.contains("open")) {
+        document.querySelector(".style-switcher").classList.remove("open");
+      }
+    });
+
+    function setActiveStyle(color) {
+      document.body.classList.remove(
+        "theme-color-1", "theme-color-2", "theme-color-3", "theme-color-4", "theme-color-5"
+      );
+      document.body.classList.add("theme-color-" + color.split("-")[1]);
+      localStorage.setItem("color", color);
+    }
+
+    dayNight.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      const icon = dayNight.querySelector("i");
+      icon.classList.toggle("fa-sun");
+      icon.classList.toggle("fa-moon");
+      localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
+    });
+
+    // Carrega preferências salvas
+    window.addEventListener("load", () => {
+      const savedColor = localStorage.getItem("color");
+      if (savedColor) {
+        setActiveStyle(savedColor);
+      }
+      if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark");
+      }
+
+      // Ícone correto
+      const icon = dayNight.querySelector("i");
+      if (document.body.classList.contains("dark")) {
+        icon.classList.add("fa-sun");
+      } else {
+        icon.classList.add("fa-moon");
+      }
+    });
+  </script>
+</body>
+</html>
